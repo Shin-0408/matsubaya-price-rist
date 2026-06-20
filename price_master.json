@@ -1,0 +1,456 @@
+{
+  "version": "V9",
+  "updated": "",
+  "stores": [
+    {
+      "code": "K0001",
+      "name": "アジョシ",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0002",
+      "name": "あんびしゃす花",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0003",
+      "name": "味鉄",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0004",
+      "name": "e-space",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0005",
+      "name": "イーサン",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0006",
+      "name": "岩茶坊",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0007",
+      "name": "えなちゃん",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0008",
+      "name": "075食堂",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0009",
+      "name": "起福",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0010",
+      "name": "佳久",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0011",
+      "name": "亀八（別）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0012",
+      "name": "亀八（本）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0013",
+      "name": "亀八（山）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0014",
+      "name": "がぶり",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0015",
+      "name": "寄まっし",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0016",
+      "name": "京亀",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0017",
+      "name": "京料理藤本",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0018",
+      "name": "金四郎食堂",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0019",
+      "name": "きん平",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0020",
+      "name": "ことら",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0021",
+      "name": "幸",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0022",
+      "name": "鮨しん",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0023",
+      "name": "翠雲苑",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0024",
+      "name": "すぎのこ亭",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0025",
+      "name": "シャム",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0026",
+      "name": "寿海",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0027",
+      "name": "秀寅",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0028",
+      "name": "新亀",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0029",
+      "name": "新福菜館（伏）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0030",
+      "name": "新福菜館（本）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0031",
+      "name": "第一旭（寺田）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0032",
+      "name": "田々",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0033",
+      "name": "坦々（本）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0034",
+      "name": "中家",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0035",
+      "name": "ならび屋",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0036",
+      "name": "ハイカラ亭",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0037",
+      "name": "はなはな",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0038",
+      "name": "ひのき",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0039",
+      "name": "冨美家（工場）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0040",
+      "name": "冨美家（錦）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0041",
+      "name": "冨美家（本）",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0042",
+      "name": "まあご",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0043",
+      "name": "まるい食堂",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0044",
+      "name": "まるちゃん",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0045",
+      "name": "まる福",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0046",
+      "name": "みずき",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0047",
+      "name": "みつ喜",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0048",
+      "name": "みまでり",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0049",
+      "name": "よこやまろうそく",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    },
+    {
+      "code": "K0050",
+      "name": "じゅん平",
+      "closingDay": "",
+      "paymentDay": "",
+      "paymentMethod": "",
+      "memo": "",
+      "products": []
+    }
+  ]
+}
