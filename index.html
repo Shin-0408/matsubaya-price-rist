@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>株式会社松葉屋製麺　商品　価格一覧表（京都市内） V10</title>
+<title>株式会社松葉屋製麺　商品　価格一覧表（京都市内） V12</title>
 <style>
 :root{--card:#fffdf8;--ink:#1e1e1e;--sub:#5d5146;--brand:#211913;--accent:#c78b36;--danger:#b83a2d;--ok:#19763f;}
 *{box-sizing:border-box}
@@ -45,7 +45,7 @@ hr{border:0;border-top:1px solid #eadfce;margin:14px 0}
 <body>
 <header>
 <h1>株式会社松葉屋製麺　商品　価格一覧表（京都市内）</h1>
-<div class="small">V10 検索修正版 / 店舗マスター50件HTML内蔵</div>
+<div class="small">V12 全端末へ反映ボタン試作版 / 店舗マスター50件HTML内蔵</div>
 </header>
 <main>
 <section id="home" class="card">
@@ -82,7 +82,7 @@ hr{border:0;border-top:1px solid #eadfce;margin:14px 0}
 
 <section id="admin" class="card hidden">
   <div class="topline"><h2>管理者ページ</h2><button class="secondary" onclick="showHome()">終了</button></div>
-  <div class="notice small">保存後、全端末へ反映する時は「GitHub更新用データを出力」で price_master.json を作り、GitHubの price_master.json に上書き。</div>
+  <div class="notice small">保存後、「全端末へ反映」を押すとGitHubの price_master.json を更新する試作版。初回だけトークン入力が必要。</div>
   <hr>
   <h3>店舗選択</h3>
   <div class="row">
@@ -106,18 +106,23 @@ hr{border:0;border-top:1px solid #eadfce;margin:14px 0}
     <button class="gold" onclick="saveAdminStore()">保存</button>
     <button onclick="copyProducts()">商品コピー</button>
     <button onclick="bulkPrice()">一括値上げ/値下げ</button>
-    <button class="secondary" onclick="downloadMaster()">GitHub更新用データを出力</button>
-    <button class="secondary" onclick="downloadBackup()">バックアップ保存</button>
+    <button class="secondary" onclick="publishToGitHub()">全端末へ反映</button>
+    <button class="secondary" onclick="downloadBackup()">バックアップ保存</button><button class="secondary" onclick="resetGitHubToken()">トークン再設定</button>
   </div>
 </section>
 </main>
 
 <script>
 const ADMIN_PASSWORD = "40822951";
-const LOCAL_KEY = "matsubaya_price_master_v10";
+const LOCAL_KEY = "matsubaya_price_master_v12";
 const REMOTE_MASTER_URL = "price_master.json";
+const GITHUB_OWNER = "Shin-0408";
+const GITHUB_REPO = "matsubaya-price-rist";
+const GITHUB_BRANCH = "main";
+const GITHUB_FILE_PATH = "price_master.json";
+const TOKEN_KEY = "matsubaya_github_token_v12";
 const DEFAULT_STORES = [{"code": "K0001", "name": "アジョシ", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0002", "name": "あんびしゃす花", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0003", "name": "味鉄", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0004", "name": "e-space", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0005", "name": "イーサン", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0006", "name": "岩茶坊", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0007", "name": "えなちゃん", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0008", "name": "075食堂", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0009", "name": "起福", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0010", "name": "佳久", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0011", "name": "亀八（別）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0012", "name": "亀八（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0013", "name": "亀八（山）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0014", "name": "がぶり", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0015", "name": "寄まっし", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0016", "name": "京亀", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0017", "name": "京料理藤本", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0018", "name": "金四郎食堂", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0019", "name": "きん平", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0020", "name": "ことら", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0021", "name": "幸", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0022", "name": "鮨しん", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0023", "name": "翠雲苑", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0024", "name": "すぎのこ亭", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0025", "name": "シャム", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0026", "name": "寿海", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0027", "name": "秀寅", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0028", "name": "新亀", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0029", "name": "新福菜館（伏）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0030", "name": "新福菜館（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0031", "name": "第一旭（寺田）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0032", "name": "田々", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0033", "name": "坦々（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0034", "name": "中家", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0035", "name": "ならび屋", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0036", "name": "ハイカラ亭", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0037", "name": "はなはな", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0038", "name": "ひのき", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0039", "name": "冨美家（工場）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0040", "name": "冨美家（錦）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0041", "name": "冨美家（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0042", "name": "まあご", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0043", "name": "まるい食堂", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0044", "name": "まるちゃん", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0045", "name": "まる福", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0046", "name": "みずき", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0047", "name": "みつ喜", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0048", "name": "みまでり", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0049", "name": "よこやまろうそく", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0050", "name": "じゅん平", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}];
-const DEFAULT_MASTER = {"version": "V10", "updated": "", "stores": [{"code": "K0001", "name": "アジョシ", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0002", "name": "あんびしゃす花", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0003", "name": "味鉄", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0004", "name": "e-space", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0005", "name": "イーサン", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0006", "name": "岩茶坊", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0007", "name": "えなちゃん", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0008", "name": "075食堂", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0009", "name": "起福", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0010", "name": "佳久", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0011", "name": "亀八（別）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0012", "name": "亀八（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0013", "name": "亀八（山）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0014", "name": "がぶり", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0015", "name": "寄まっし", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0016", "name": "京亀", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0017", "name": "京料理藤本", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0018", "name": "金四郎食堂", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0019", "name": "きん平", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0020", "name": "ことら", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0021", "name": "幸", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0022", "name": "鮨しん", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0023", "name": "翠雲苑", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0024", "name": "すぎのこ亭", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0025", "name": "シャム", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0026", "name": "寿海", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0027", "name": "秀寅", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0028", "name": "新亀", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0029", "name": "新福菜館（伏）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0030", "name": "新福菜館（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0031", "name": "第一旭（寺田）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0032", "name": "田々", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0033", "name": "坦々（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0034", "name": "中家", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0035", "name": "ならび屋", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0036", "name": "ハイカラ亭", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0037", "name": "はなはな", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0038", "name": "ひのき", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0039", "name": "冨美家（工場）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0040", "name": "冨美家（錦）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0041", "name": "冨美家（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0042", "name": "まあご", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0043", "name": "まるい食堂", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0044", "name": "まるちゃん", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0045", "name": "まる福", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0046", "name": "みずき", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0047", "name": "みつ喜", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0048", "name": "みまでり", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0049", "name": "よこやまろうそく", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0050", "name": "じゅん平", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}]};
+const DEFAULT_MASTER = {"version": "V12", "updated": "", "stores": [{"code": "K0001", "name": "アジョシ", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0002", "name": "あんびしゃす花", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0003", "name": "味鉄", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0004", "name": "e-space", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0005", "name": "イーサン", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0006", "name": "岩茶坊", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0007", "name": "えなちゃん", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0008", "name": "075食堂", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0009", "name": "起福", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0010", "name": "佳久", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0011", "name": "亀八（別）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0012", "name": "亀八（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0013", "name": "亀八（山）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0014", "name": "がぶり", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0015", "name": "寄まっし", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0016", "name": "京亀", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0017", "name": "京料理藤本", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0018", "name": "金四郎食堂", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0019", "name": "きん平", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0020", "name": "ことら", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0021", "name": "幸", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0022", "name": "鮨しん", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0023", "name": "翠雲苑", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0024", "name": "すぎのこ亭", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0025", "name": "シャム", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0026", "name": "寿海", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0027", "name": "秀寅", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0028", "name": "新亀", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0029", "name": "新福菜館（伏）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0030", "name": "新福菜館（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0031", "name": "第一旭（寺田）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0032", "name": "田々", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0033", "name": "坦々（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0034", "name": "中家", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0035", "name": "ならび屋", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0036", "name": "ハイカラ亭", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0037", "name": "はなはな", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0038", "name": "ひのき", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0039", "name": "冨美家（工場）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0040", "name": "冨美家（錦）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0041", "name": "冨美家（本）", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0042", "name": "まあご", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0043", "name": "まるい食堂", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0044", "name": "まるちゃん", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0045", "name": "まる福", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0046", "name": "みずき", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0047", "name": "みつ喜", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0048", "name": "みまでり", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0049", "name": "よこやまろうそく", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}, {"code": "K0050", "name": "じゅん平", "closingDay": "", "paymentDay": "", "paymentMethod": "", "memo": "", "products": []}]};
 let master = null;
 
 function deepCopy(x){return JSON.parse(JSON.stringify(x));}
@@ -166,7 +171,7 @@ async function loadMaster(){
   renderStoreSelect();
 }
 function showOnly(id){["home","storePage","adminLogin","admin"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");}
-function showHome(){showOnly("home");setTimeout(()=>document.getElementById("searchCode").focus(),50);}
+function showHome(){showOnly("home");const sc=document.getElementById("searchCode");if(sc) sc.value="";setTimeout(()=>sc&&sc.focus(),50);}
 function showAdminLogin(){showOnly("adminLogin");document.getElementById("adminPass").value="";document.getElementById("adminPass").focus();}
 function loginAdmin(){if(document.getElementById("adminPass").value===ADMIN_PASSWORD){renderStoreSelect();showOnly("admin");loadAdminStore();}else alert("パスワードが違うで");}
 function goStore(){const code=normalizeCode(document.getElementById("searchCode").value);if(!code)return;const s=byCode(code);if(!s){alert("店舗コードが見つからへん："+code);return;}showStore(code);}
@@ -194,6 +199,74 @@ function bulkPrice(){const yen=Number(prompt("全商品に加算する金額。�
 function downloadMaster(){master.updated=nowText();downloadFile("price_master.json",JSON.stringify(master,null,2));}
 function downloadBackup(){master.updated=nowText();downloadFile("backup_price_master_"+Date.now()+".json",JSON.stringify(master,null,2));}
 function downloadFile(name,content){const blob=new Blob([content],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+
+async function publishToGitHub(){
+  saveAdminStoreNoAlert();
+  let token = localStorage.getItem(TOKEN_KEY);
+  if(!token){
+    token = prompt("メモ帳に保存したGitHubトークンを貼り付けて");
+    if(!token){ alert("トークン未入力やから中止したで"); return; }
+    localStorage.setItem(TOKEN_KEY, token.trim());
+  }
+  master.updated = nowText();
+  const content = JSON.stringify(master, null, 2);
+  const api = "https://api.github.com/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/contents/"+GITHUB_FILE_PATH;
+  try{
+    const getRes = await fetch(api + "?ref=" + GITHUB_BRANCH, {
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Accept": "application/vnd.github+json"
+      }
+    });
+    if(!getRes.ok){ throw new Error("GitHubから現在データ取得に失敗：" + getRes.status); }
+    const current = await getRes.json();
+    const encoded = btoa(unescape(encodeURIComponent(content)));
+    const putRes = await fetch(api, {
+      method: "PUT",
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Accept": "application/vnd.github+json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: "価格表データ更新 " + master.updated,
+        content: encoded,
+        sha: current.sha,
+        branch: GITHUB_BRANCH
+      })
+    });
+    if(!putRes.ok){
+      const txt = await putRes.text();
+      throw new Error("GitHub更新に失敗：" + putRes.status + " " + txt);
+    }
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(master));
+    alert("全端末へ反映したで。各端末はWi-Fi接続時に最新データ確認してな。");
+  }catch(e){
+    alert("全端末へ反映できひんかった。\n" + e.message + "\nトークンを入れ直す場合は管理者ページで「トークン再設定」を押してな。");
+  }
+}
+function saveAdminStoreNoAlert(){
+  const oldCode=document.getElementById("adminStoreSelect").value;
+  const s=byCode(oldCode);
+  if(!s) return;
+  const newCode=normalizeCode(document.getElementById("aCode").value);
+  if(!newCode) return;
+  s.code=newCode;
+  s.name=document.getElementById("aName").value.trim();
+  s.closingDay=document.getElementById("aClosing").value.trim();
+  s.paymentDay=document.getElementById("aPaymentDay").value.trim();
+  s.paymentMethod=document.getElementById("aPaymentMethod").value.trim();
+  s.memo=document.getElementById("aMemo").value.trim();
+  s.products=collectProducts();
+  saveLocal();
+  renderStoreSelect();
+  document.getElementById("adminStoreSelect").value=newCode;
+}
+function resetGitHubToken(){
+  localStorage.removeItem(TOKEN_KEY);
+  alert("トークンを消したで。次に全端末へ反映を押した時に再入力できる。");
+}
+
 async function manualUpdate(){await loadMaster();alert("更新確認したで");}
 function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 function escAttr(s){return esc(s);}
